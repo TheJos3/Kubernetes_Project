@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: contenedorKubernetes #Nombre del service/contenedor
+  labels:
+    app: contenedorKubernetes
+spec:
+  ports:
+    - port: 8080 #Puerto expuesto del contenedor, para acceder desde internet
+      targetPort: 80 #Puerto interno del pod
+      nodePort: 31200 #Para acceder a el si estamos dentro del clúster desde cualquier nodo
+  selector:
+    app: proyectoKubernetes #A que pod/Deployment pertenece
+  type: LoadBalancer #Para que nuestro servicio pueda ser visto fuera del cluster, es decir internet
