@@ -17,4 +17,4 @@ spec:
           image: joseangelgarciagarcia/pipeline-demo
           imagePullPolicy: Always
           ports:
-            - containerPort: 80 #Puerto interno del pod
+            - containerPort: 80 #Puerto interno del pod,
