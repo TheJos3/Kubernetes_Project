@@ -1,19 +1,19 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: proyectoKubernetes #Nombre del deployemnt/pod
+  name: proyectokubernetes #Nombre del deployemnt/pod
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: proyectoKubernetes #Le decimos que el mismo pertenece a este deployment
+      app: proyectokubernetes #Le decimos que el mismo pertenece a este deployment
   template:
     metadata:
       labels:
-        app: proyectoKubernetes
+        app: proyectokubernetes
     spec:
       containers:
-        - name: CentosJenkins #Indico un nombre significativo de que contiene esta imagen
+        - name: centosjenkins #Indico un nombre significativo de que contiene esta imagen
           image: joseangelgarciagarcia/pipeline-demo
           imagePullPolicy: Always
           ports:
