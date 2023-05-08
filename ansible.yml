@@ -1,5 +1,5 @@
 - hosts: all
-  connection: ssh
+  connection: local
   become: yes
   tasks:
     - name: create new deployment
