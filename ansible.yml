@@ -3,6 +3,6 @@
   become: true
   tasks:
     - name: create new deployment
-      command: kubectl apply -f . --kubeconfig=/home/alumno/.kube/config"
+      shell: kubectl apply -f . --kubeconfig=/home/alumno/.kube/config"
     - name: create new service
-      raw: kubectl apply -f /home/alumno/Service.yml
+      shell: kubectl apply -f /home/alumno/Service.yml
