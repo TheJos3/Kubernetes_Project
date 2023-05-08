@@ -1,7 +1,6 @@
 - hosts: all
   connection: local
   become: true
-  ignore_errors: true
   tasks:
     - name: delete old deployment
       command: kubectl delete -f /home/ubuntu/Deployment.yml
