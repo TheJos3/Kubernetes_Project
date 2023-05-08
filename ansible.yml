@@ -3,6 +3,6 @@
   become: true
   tasks:
     - name: create new deployment
-      shell: kubectl apply -f /home/alumno/Deployment.yml
+      raw: kubectl apply -f /home/alumno/Deployment.yml
     - name: create new service
-      shell: kubectl apply -f /home/alumno/Service.yml
+      raw: kubectl apply -f /home/alumno/Service.yml
