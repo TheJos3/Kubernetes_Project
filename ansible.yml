@@ -1,4 +1,5 @@
 - hosts: all
+connection: local
   become: true
   tasks: 
      - name: delete old deployment
