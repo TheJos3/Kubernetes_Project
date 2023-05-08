@@ -1,9 +1,5 @@
 - hosts: kubernetes
   tasks:
-    - name: borrar antiguo deployment
-      command: kubectl delete -f /home/alumno/Deployment.yml
-    - name: borrar antiguo service
-      command: kubectl delete -f /home/alumno/Service.yml
     - name: crear nuevo deployment
       command: kubectl apply -f /home/alumno/Deployment.yml
     - name: crear nuevo service
