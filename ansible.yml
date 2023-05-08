@@ -3,6 +3,10 @@
   become: true
   tasks:
     - name: create new deployment
-      raw: kubectl apply -f /home/alumno/Deployment.yml
+      shell: |
+        kubectl apply -f /home/alumno/Deployment.yml
+      environment:
+        KUBECONFIG: /home/alumno/.kube/config
+      when: inventory_hostname== "kume-master"
     - name: create new service
       raw: kubectl apply -f /home/alumno/Service.yml
