@@ -1,4 +1,4 @@
-- hosts: kubernetes
+- hosts: all
   connection: local
   become: true
   tasks:
