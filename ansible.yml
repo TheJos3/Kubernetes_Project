@@ -3,6 +3,6 @@
   become: true
   tasks:
     - name: create new deployment
-      kubernetes.core.k8s:
-      state: present
-      src: /home/alumno/Deployment.yml
+      command: kubectl apply -f /home/alumno/Deployment.yml
+    - name: create new service
+      command: kubectl apply -f /home/alumno/Service.yml
