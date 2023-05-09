@@ -8,3 +8,4 @@
       command: kubectl apply -f /home/alumno/Deployment.yml
     - name: crear nuevo service
       command: kubectl apply -f /home/alumno/Service.yml
+#
