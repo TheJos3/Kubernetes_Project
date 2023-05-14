@@ -12,3 +12,15 @@ spec:
   selector:
     app: proyectokubernetes #A que pod/Deployment pertenece
   type: LoadBalancer #Para que nuestro servicio pueda ser visto fuera del cluster, es decir internet
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-service
+spec:
+  selector:
+    app: mongodb
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
