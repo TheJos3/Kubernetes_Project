@@ -7,6 +7,7 @@ MAINTAINER joseangarcia3@gmail.com
 #RUN yum -y install java
 #CMD /bin/bash
 
+RUN apt update
 RUN apt install -y apache2 \
  zip\
  unzip
