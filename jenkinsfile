@@ -10,8 +10,8 @@ pipeline {
     
     stage('Comprobando conexión entre los Servidores de Jenkins y Ansible-Kubernetes '){
          steps {
-     sh 'ping 192.168.31.141'
-     sh 'ping 192.168.31.142'
+     sh 'ping -c 3 192.168.31.141'
+     sh 'ping -c 3 192.168.31.142'
         }
     }
      
