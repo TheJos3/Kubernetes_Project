@@ -19,8 +19,8 @@ pipeline {
         steps {
         sshagent(['ansible_credentials']) {
             sh 'ssh alumno@192.168.31.141'
-            sh 'scp /var/lib/jenkins/workspace/pipeline-demo/ansible.yml alumno@192.168.31.141:/home/alumno/'
-            sh 'scp /var/lib/jenkins/workspace/pipeline-demo/Dockerfile alumno@192.168.31.141:/home/alumno/'
+            sh 'scp /var/lib/jenkins/workspace/jenkinsfile/ansible.yml alumno@192.168.31.141:/home/alumno/'
+            sh 'scp /var/lib/jenkins/workspace/jenkinsfile/Dockerfile alumno@192.168.31.141:/home/alumno/'
         }
         }
     }
@@ -63,8 +63,8 @@ pipeline {
         steps {
              sh 'ssh alumno@192.168.31.142'
              sh 'minikube start'
-             sh 'scp /var/lib/jenkins/workspace/pipeline-demo/Deployment.yml alumno@192.168.31.142:/home/alumno/'
-             sh 'scp /var/lib/jenkins/workspace/pipeline-demo/Service.yml alumno@192.168.31.142:/home/alumno/'
+             sh 'scp /var/lib/jenkins/workspace/jenkinsfile/Deployment.yml alumno@192.168.31.142:/home/alumno/'
+             sh 'scp /var/lib/jenkins/workspace/jenkinsfile/Service.yml alumno@192.168.31.142:/home/alumno/'
         
     }
     }
