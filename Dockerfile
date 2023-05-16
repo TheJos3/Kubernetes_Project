@@ -7,8 +7,11 @@ MAINTAINER joseangarcia3@gmail.com
 #RUN yum -y install java
 #CMD /bin/bash
 
+
 RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
 RUN sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+RUN dnf --disablerepo '*' --enablerepo=extras swap centos-linux-repos centos-stream-repos
+RUN dnf distro-sync
 
 RUN yum install -y httpd \
  zip\
