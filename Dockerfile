@@ -1,4 +1,4 @@
-FROM  centos:7
+FROM  ubuntu:latest
 MAINTAINER joseangarcia3@gmail.com
 
 #RUN cd /etc/yum.repos.d/
@@ -7,7 +7,7 @@ MAINTAINER joseangarcia3@gmail.com
 #RUN yum -y install java
 #CMD /bin/bash
 
-RUN yum install -y httpd \
+RUN apt install -y apache2 \
  zip\
  unzip
 ADD https://www.free-css.com/assets/files/free-css-templates/download/page254/photogenic.zip /var/www/html/
