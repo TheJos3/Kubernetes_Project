@@ -1,0 +1,82 @@
+pipeline {
+    agent any
+
+    stages {
+    stage('Verificación de Git'){
+        steps {
+        git 'https://github.com/TheJos3/Kubernetes_Project.git'
+        }
+    }
+    
+    stage('Comprobando conexión entre los Servidores de Jenkins y Ansible-Kubernetes '){
+         steps {
+     sh 'ping 192.168.31.141'
+     sh 'ping 192.168.31.142'
+        }
+    }
+     
+    stage('Enviando Dockerfile a servidor Ansible mediante ssh'){
+        steps {
+        sshagent(['ansible_credentials']) {
+            sh 'ssh alumno@192.168.31.141'
+            sh 'scp /var/lib/jenkins/workspace/pipeline-demo/ansible.yml alumno@192.168.31.141:/home/alumno/'
+            sh 'scp /var/lib/jenkins/workspace/pipeline-demo/Dockerfile alumno@192.168.31.141:/home/alumno/'
+        }
+        }
+    }
+     stage('Docker Build Image'){
+        steps {
+        sshagent(['ansible_credentials']) {    
+            sh 'ssh alumno@192.168.31.141 cd /home/alumno/'
+            sh 'ssh alumno@192.168.31.141 docker image build -t $JOB_NAME:v1.$BUILD_ID .'
+        } 
+        }
+    }
+    
+    stage('Docker image tagging'){ 
+        steps {
+         sshagent(['ansible_credentials']) {
+            sh 'ssh alumno@192.168.31.141 cd /home/alumno/'
+            sh 'ssh alumno@192.168.31.141 docker image tag $JOB_NAME:v1.$BUILD_ID joseangelgarciagarcia/$JOB_NAME:v1.$BUILD_ID'
+            sh 'ssh alumno@192.168.31.141 docker image tag $JOB_NAME:v1.$BUILD_ID joseangelgarciagarcia/$JOB_NAME:latest'
+
+        }
+    }
+    }
+    
+    stage('Mover imagenes de docker  a docker hub'){
+        steps {
+        sshagent(['ansible_credentials']) {
+            withCredentials([string(credentialsId: 'dockerhub_password', variable: 'dockerhub_password')]) {
+                sh "ssh alumno@192.168.31.141 docker login -u joseangelgarciagarcia -p ${dockerhub_password}"
+                sh 'ssh alumno@192.168.31.141 docker image push joseangelgarciagarcia/$JOB_NAME:v1.$BUILD_ID'
+                sh 'ssh alumno@192.168.31.141 docker image push joseangelgarciagarcia/$JOB_NAME:latest'
+                 
+                sh 'ssh alumno@192.168.31.141 docker image rmi joseangelgarciagarcia/$JOB_NAME:v1.$BUILD_ID joseangelgarciagarcia/$JOB_NAME:latest $JOB_NAME:v1.$BUILD_ID'
+            }
+           
+        }
+        }
+    }
+    
+    stage('Copiar repositorio de github al servidor de Kubernetes'){
+        steps {
+             sh 'ssh alumno@192.168.31.142'
+             sh 'minikube start'
+             sh 'scp /var/lib/jenkins/workspace/pipeline-demo/Deployment.yml alumno@192.168.31.142:/home/alumno/'
+             sh 'scp /var/lib/jenkins/workspace/pipeline-demo/Service.yml alumno@192.168.31.142:/home/alumno/'
+        
+    }
+    }
+    
+    stage('Kubernetes Deployment con Ansible'){
+        steps {
+        sshagent(['ansible_credentials']) {
+            sh 'ssh alumno@192.168.31.141 cd /home/alumno'
+            sh 'ssh alumno@192.168.31.141 ansible-playbook ansible.yml'
+        }
+        }
+    }
+}
+
+}
