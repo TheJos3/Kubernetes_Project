@@ -1,17 +1,11 @@
 FROM  centos:latest
 MAINTAINER joseangarcia3@gmail.com
 
-#RUN cd /etc/yum.repos.d/
-#RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
-#RUN sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
-#RUN yum -y install java
-#CMD /bin/bash
-
-
+RUN cd /etc/yum.repos.d/
 RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
 RUN sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
-RUN dnf clean all && rm -r /var/cache/dnf  && dnf upgrade -y && dnf update -y 
-RUN dnf clean all && rm -r /var/cache/dnf  && dnf upgrade -y && dnf update -y & echo hostname
+RUN yum -y install java
+CMD /bin/bash
 
 RUN yum install -y httpd \
  zip\
