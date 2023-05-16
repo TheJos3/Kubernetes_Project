@@ -6,7 +6,10 @@ MAINTAINER joseangarcia3@gmail.com
 #RUN sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
 #RUN yum -y install java
 #CMD /bin/bash
-RUN yum update -y && yum install httpd httpd-tools -y
+
+RUN sed -i -e "s|mirrorlist=|#mirrorlist=|g" /etc/yum.repos.d/CentOS-*
+RUN sed -i -e "s|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g" /etc/yum.repos.d/CentOS-*
+
 
 RUN yum install -y httpd \
  zip\
