@@ -1,8 +1,5 @@
-FROM  centos:latest
+FROM  centos:7
 MAINTAINER joseangarcia3@gmail.com
-
-RUN echo "nameserver 8.8.8.8" > /etc/resolv.conf
-RUN echo "nameserver 8.8.4.4" > /etc/resolv.conf
 
 RUN cd /etc/yum.repos.d/
 RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
