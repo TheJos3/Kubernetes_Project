@@ -5,7 +5,7 @@
     - name: borrar antiguo centos
       command: kubectl delete -f /home/alumno/centos.yml
     - name: borrar antiguo mongodb
-      command: kubectl delete -f /home/alumno/mongo.yml
+      command: kubectl delete -f /home/alumno/mongodb.yml
     - name: crear nuevo centos
       command: kubectl apply -f /home/alumno/centos.yml
     - name: crear nuevo mongodb
