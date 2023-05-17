@@ -2,12 +2,12 @@
   tasks:
     - name: iniciar minikube
       command: minikube start
-    - name: borrar antiguo deployment
-      command: kubectl delete -f /home/alumno/Deployment.yml
-    - name: borrar antiguo service
-      command: kubectl delete -f /home/alumno/Service.yml
-    - name: crear nuevo deployment
-      command: kubectl apply -f /home/alumno/Deployment.yml
-    - name: crear nuevo service
-      command: kubectl apply -f /home/alumno/Service.yml
+    - name: borrar antiguo centos
+      command: kubectl delete -f /home/alumno/centos.yml
+        - name: borrar antiguo mongodb
+      command: kubectl delete -f /home/alumno/mongo.yml
+    - name: crear nuevo centos
+      command: kubectl apply -f /home/alumno/centos.yml
+    - name: crear nuevo mongodb
+      command: kubectl apply -f /home/alumno/mongodb.yml
 #
