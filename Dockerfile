@@ -7,7 +7,7 @@ MAINTAINER joseangarcia3@gmail.com
 #RUN yum -y install java
 #CMD /bin/bash
 
-
+RUN "sh" "-c" "echo nameserver 8.8.8.8 >> /etc/resolv.conf"
 RUN apt-get update && apt-get install -y apache2 \
  zip\
  unzip
