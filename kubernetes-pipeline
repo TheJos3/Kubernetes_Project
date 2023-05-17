@@ -46,7 +46,7 @@ pipeline {
     }
     }
     
-    stage('Mover imagenes de docker  a docker hub'){
+    stage('Mover imagenes de docker a docker hub'){
         steps {
         sshagent(['ansible_credentials']) {
             withCredentials([string(credentialsId: 'dockerhub_password', variable: 'dockerhub_password')]) {

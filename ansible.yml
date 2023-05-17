@@ -1,5 +1,7 @@
 - hosts: kubernetes
   tasks:
+    - name: iniciar minikube
+      command: minikube start
     - name: borrar antiguo deployment
       command: kubectl delete -f /home/alumno/Deployment.yml
     - name: borrar antiguo service

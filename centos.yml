@@ -19,24 +19,17 @@ spec:
           ports:
             - containerPort: 80 #Puerto interno del pod
 ---
-apiVersion: apps/v1
-kind: Deployment
+kind: Service
+apiVersion: v1
 metadata:
-  name: mongodb-deployment
+  name: contenedorkubernetes #Nombre del service/contenedor
   labels:
-    app: mongodb
+    app: contenedorkubernetes
 spec:
-  replicas: 1
+  ports:
+    - port: 8080 #Puerto expuesto del contenedor, para acceder desde internet
+      targetPort: 80 #Puerto interno del pod
+      nodePort: 31200 #Para acceder a el si estamos dentro del clúster desde cualquier nodo
   selector:
-    matchLabels:
-      app: mongodb
-  template:
-    metadata:
-      labels:
-        app: mongodb
-    spec:
-      containers:
-        - name: mongodb
-          image: mongo
-          ports:
-            - containerPort: 27017
+    app: proyectokubernetes #A que pod/Deployment pertenece
+  type: LoadBalancer #Para que nuestro servicio pueda ser visto fuera del cluster, es decir internet
