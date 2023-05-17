@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: centosjenkins #Indico un nombre significativo de que contiene esta imagen
-          image: joseangelgarciagarcia/pipeline-demo
+          image: joseangelgarciagarcia/kubernetes-pipeline
           imagePullPolicy: Always
           ports:
             - containerPort: 80 #Puerto interno del pod

@@ -2,13 +2,13 @@ pipeline {
     agent any
 
     stages {
-    stage('Verificación de Git'){
+    stage('Obteniendo repositorio Git'){
         steps {
         git 'https://github.com/TheJos3/Kubernetes_Project.git'
         }
     }
     
-    stage('Comprobando conexión entre los Servidores de Jenkins y Ansible-Kubernetes '){
+    stage('Comprobando conexión con los servidores de Ansible y Kubernetes '){
          steps {
      sh 'ping -c 3 192.168.31.141'
      sh 'ping -c 3 192.168.31.142'
@@ -19,8 +19,8 @@ pipeline {
         steps {
         sshagent(['ansible_credentials']) {
             sh 'ssh alumno@192.168.31.141'
-            sh 'scp /var/lib/jenkins/workspace/jenkinsfile/ansible.yml alumno@192.168.31.141:/home/alumno/'
-            sh 'scp /var/lib/jenkins/workspace/jenkinsfile/Dockerfile alumno@192.168.31.141:/home/alumno/'
+            sh 'scp /var/lib/jenkins/workspace/kubernetes-pipeline/ansible.yml alumno@192.168.31.141:/home/alumno/'
+            sh 'scp /var/lib/jenkins/workspace/kubernetes-pipeline/Dockerfile alumno@192.168.31.141:/home/alumno/'
         }
         }
     }
@@ -28,6 +28,8 @@ pipeline {
         steps {
         sshagent(['ansible_credentials']) {    
             sh 'ssh alumno@192.168.31.141 cd /home/alumno/'
+            sh 'echo "alumno" > sudo  -S systemctl daemon-reload'
+            sh 'echo "alumno" > sudo -S systemctl restart docker'
             sh 'ssh alumno@192.168.31.141 docker image build -t $JOB_NAME:v1.$BUILD_ID .'
         } 
         }
@@ -62,9 +64,8 @@ pipeline {
     stage('Copiar repositorio de github al servidor de Kubernetes'){
         steps {
              sh 'ssh alumno@192.168.31.142'
-             sh 'minikube start'
-             sh 'scp /var/lib/jenkins/workspace/jenkinsfile/Deployment.yml alumno@192.168.31.142:/home/alumno/'
-             sh 'scp /var/lib/jenkins/workspace/jenkinsfile/Service.yml alumno@192.168.31.142:/home/alumno/'
+             sh 'scp /var/lib/jenkins/workspace/kubernetes-pipeline/Deployment.yml alumno@192.168.31.142:/home/alumno/'
+             sh 'scp /var/lib/jenkins/workspace/kubernetes-pipeline/Service.yml alumno@192.168.31.142:/home/alumno/'
         
     }
     }
