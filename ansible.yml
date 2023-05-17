@@ -2,11 +2,42 @@
   tasks:
     - name: iniciar minikube
       command: minikube start
+
     - name: borrar antiguo centos
       command: kubectl delete -f /home/alumno/centos.yml
+      failed_when: false
+
     - name: borrar antiguo mongodb
       command: kubectl delete -f /home/alumno/mongodb.yml
+      failed_when: false
+
     - name: crear nuevo centos
       command: kubectl apply -f /home/alumno/centos.yml
+
     - name: crear nuevo mongodb
       command: kubectl apply -f /home/alumno/mongodb.yml
+
+    - name: instalar prometheus
+      command: helm install prometheus prometheus-community/kube-prometheus-stack
+      failed_when: false
+
+    - name: instalar mongodb-exporter para prometheus
+      command: helm install mongodb-exporter prometheus-community/prometheus-mongodb-exporter -f mongodbexporter.yml
+      failed_when: false
+
+    - name: activar mongodb-exporter
+      command: kubectl port-forward services/mongodb-exporter-prometheus-mongodb-exporter 9216
+
+    - name: activar monitorización prometheus
+      command: kubectl port-forward prometheus-prometheus-kube-prometheus-prometheus-0 9090
+
+    - name: activar monitorización grafana
+      command: kubectl port-forward deplyment/prometheus-grafana 3000
+
+    - name: Ejecutar comando echo
+      command: echo "El puerto de prometheus es el 9090, el de grafana el 3000"
+      register: echo_output
+
+    - name: Mostrar mensaje en el host remoto
+      debug:
+        msg: "{{ echo_output.stdout }}"

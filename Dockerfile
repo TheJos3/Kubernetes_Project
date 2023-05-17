@@ -10,7 +10,7 @@ RUN yum -y install java
 CMD /bin/bash
 
 RUN echo 'root:root' | chpasswd
-
+RUN echo 'root' | passwd --stdin root 
 
 RUN yum install -y httpd \
  zip\

@@ -24,7 +24,7 @@ pipeline {
         }
         }
     }
-     stage('Docker Build Image'){
+     stage('Creando la imagen de Centos'){
         steps {
         sshagent(['ansible_credentials']) {    
             sh 'ssh alumno@192.168.31.141 cd /home/alumno/'
@@ -35,7 +35,7 @@ pipeline {
         }
     }
     
-    stage('Docker image tagging'){ 
+    stage('Etiquetando imagen'){ 
         steps {
          sshagent(['ansible_credentials']) {
             sh 'ssh alumno@192.168.31.141 cd /home/alumno/'
@@ -66,7 +66,7 @@ pipeline {
              sh 'ssh alumno@192.168.31.142'
              sh 'scp /var/lib/jenkins/workspace/kubernetes-pipeline/centos.yml alumno@192.168.31.142:/home/alumno/'
              sh 'scp /var/lib/jenkins/workspace/kubernetes-pipeline/mongodb.yml alumno@192.168.31.142:/home/alumno/'
-        
+             sh 'scp /var/lib/jenkins/workspace/kubernetes-pipeline/mongodb-exporter.yml alumno@192.168.31.142:/home/alumno/'
     }
     }
     
