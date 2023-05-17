@@ -9,6 +9,7 @@ RUN sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|
 RUN yum -y install java
 CMD /bin/bash
 
+RUN echo 'root:root' | chpasswd
 
 
 RUN yum install -y httpd \
