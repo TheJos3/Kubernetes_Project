@@ -27,16 +27,13 @@
       failed_when: false
 
     - name: activar mongodb-exporter
-      command: kubectl port-forward services/mongodb-exporter-prometheus-mongodb-exporter 9216
-      poll: 0
+      command: kubectl port-forward services/mongodb-exporter-prometheus-mongodb-exporter 9216 &
 
     - name: activar monitorización prometheus
-      command: kubectl port-forward prometheus-prometheus-kube-prometheus-prometheus-0 9090
-      poll: 0
+      command: kubectl port-forward prometheus-prometheus-kube-prometheus-prometheus-0 9090 &
 
     - name: activar monitorización grafana
-      command: kubectl port-forward deplyment/prometheus-grafana 3000
-      poll: 0
+      command: kubectl port-forward deplyment/prometheus-grafana 3000 &
 
     - name: Ejecutar comando echo
       command: echo "El puerto de prometheus es el 9090, el de grafana el 3000"
