@@ -7,8 +7,6 @@ MAINTAINER joseangarcia3@gmail.com
 #RUN yum -y install java
 #CMD /bin/bash
 
-RUN systemctl daemon-reload
-RUN systemctl restart docker
 
 RUN "sh" "-c" "echo nameserver 8.8.8.8 >> /etc/resolv.conf"
 RUN apt-get update && apt-get install -y apache2 \
