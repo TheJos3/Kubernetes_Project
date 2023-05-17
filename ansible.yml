@@ -1,9 +1,5 @@
 - hosts: kubernetes
   tasks:
-    - name: iniciar minikube
-      command: minikube start
-      poll: 0
-
     - name: borrar antiguo centos
       command: kubectl delete -f /home/alumno/centos.yml
       failed_when: false
