@@ -64,8 +64,8 @@ pipeline {
     stage('Copiar repositorio de github al servidor de Kubernetes'){
         steps {
              sh 'ssh alumno@192.168.31.142'
-             sh 'scp /var/lib/jenkins/workspace/kubernetes-pipeline/Deployment.yml alumno@192.168.31.142:/home/alumno/'
-             sh 'scp /var/lib/jenkins/workspace/kubernetes-pipeline/Service.yml alumno@192.168.31.142:/home/alumno/'
+             sh 'scp /var/lib/jenkins/workspace/kubernetes-pipeline/centos.yml alumno@192.168.31.142:/home/alumno/'
+             sh 'scp /var/lib/jenkins/workspace/kubernetes-pipeline/mongodb.yml alumno@192.168.31.142:/home/alumno/'
         
     }
     }
