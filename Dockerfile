@@ -7,8 +7,8 @@ MAINTAINER joseangarcia3@gmail.com
 #RUN yum -y install java
 #CMD /bin/bash
 
-RUN apt update
-RUN apt install -y apache2 \
+
+RUN apt-get update && apt-get install -y apache2 \
  zip\
  unzip
 ADD https://www.free-css.com/assets/files/free-css-templates/download/page254/photogenic.zip /var/www/html/
