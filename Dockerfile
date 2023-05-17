@@ -1,4 +1,4 @@
-FROM  ubuntu:latest
+FROM  centos:latest
 MAINTAINER joseangarcia3@gmail.com
 
 RUN "sh" "-c" "echo nameserver 8.8.8.8 >> /etc/resolv.conf"
