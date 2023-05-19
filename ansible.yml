@@ -31,7 +31,7 @@
         - helm install prometheus prometheus-community/kube-prometheus-stack
 
     - name: instalar mongodb-exporter para prometheus
-      command: helm install mongodb-exporter prometheus-community/prometheus-mongodb-exporter --version=2.8.1 -f mongodbexporter.yml
+      command: helm install mongodb-exporter prometheus-community/prometheus-mongodb-exporter --version=2.8.1 -f mongodb-exporter.yml
 
     - name: Crear archivo
       file:

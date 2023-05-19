@@ -1,16 +1,16 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: proyectokubernetes #Nombre del deployemnt/pod
+  name: centosDeployment #Nombre del deployemnt/pod
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: proyectokubernetes #Le decimos que el mismo pertenece a este deployment
+      app: centosDeployment #Le decimos que el mismo pertenece a este deployment
   template:
     metadata:
       labels:
-        app: proyectokubernetes
+        app: centosDeployment
     spec:
       containers:
         - name: centosjenkins #Indico un nombre significativo de que contiene esta imagen
@@ -22,14 +22,14 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: contenedorkubernetes #Nombre del service/contenedor
+  name: centosService #Nombre del service/contenedor
   labels:
-    app: contenedorkubernetes
+    app: centosService
 spec:
   ports:
     - port: 8080 #Puerto expuesto del contenedor, para acceder desde internet
       targetPort: 80 #Puerto interno del pod
       nodePort: 31200 #Para acceder a el si estamos dentro del clúster desde cualquier nodo
   selector:
-    app: proyectokubernetes #A que pod/Deployment pertenece
+    app: centosDeployment #A que pod/Deployment pertenece
   type: LoadBalancer #Para que nuestro servicio pueda ser visto fuera del cluster
