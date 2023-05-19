@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: centosjenkins #Indico un nombre significativo de que contiene esta imagen
-          image: joseangelgarciagarcia/kubernetes-pipeline
+          image: joseangelgarciagarcia/kubernetes-pipeline #DOCKERHUB
           imagePullPolicy: Always
           ports:
             - containerPort: 80 #Puerto interno del pod
@@ -32,4 +32,4 @@ spec:
       nodePort: 31200 #Para acceder a el si estamos dentro del clúster desde cualquier nodo
   selector:
     app: proyectokubernetes #A que pod/Deployment pertenece
-  type: LoadBalancer #Para que nuestro servicio pueda ser visto fuera del cluster, es decir internet
+  type: LoadBalancer #Para que nuestro servicio pueda ser visto fuera del cluster
