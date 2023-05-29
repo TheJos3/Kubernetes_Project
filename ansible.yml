@@ -50,3 +50,4 @@
         path: /home/alumno/LEEME.txt
         line: "Monitorización Grafana: kubectl port-forward deployment/prometheus-grafana 3000"
         create: yes
+#
